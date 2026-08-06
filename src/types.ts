@@ -44,3 +44,39 @@ export interface Review {
   relativeTime: string;
   verified: boolean;
 }
+
+export interface HeroSlide {
+  id: string;
+  title: string;
+  subtitle: string;
+  tagline: string;
+  location: string;
+  image: string;
+  badge: string;
+  projectId?: string;
+}
+
+export interface FaqItem {
+  id: string;
+  category: 'Pricing & BOQ' | 'Execution & Timeline' | 'Workshop & Manufacturing' | 'Warranty & Materials' | 'Design & Renders';
+  question: string;
+  answer: string;
+}
+
+export interface ProcessStep {
+  step: number;
+  title: string;
+  subtitle: string;
+  description: string;
+  duration: string;
+  deliverables: string[];
+  icon: string;
+}
+
+export interface WhyChooseUsItem {
+  id: string;
+  title: string;
+  description: string;
+  highlight: string;
+  iconName: string;
+}

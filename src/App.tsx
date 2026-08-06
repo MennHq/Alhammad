@@ -38,8 +38,16 @@ import ImageTrail from './components/ImageTrail';
 import FluidCursorTrail from './components/FluidCursorTrail';
 import ImageLightboxModal, { LightboxItem } from './components/ImageLightboxModal';
 
+import HeroSlider from './components/HeroSlider';
+import WhyChooseUs from './components/WhyChooseUs';
+import ProcessWorkflow from './components/ProcessWorkflow';
+import TestimonialsSection from './components/TestimonialsSection';
+import FaqSection from './components/FaqSection';
+
+export type TabType = 'home' | 'hero' | 'why-us' | 'process' | 'portfolio' | 'testimonials' | 'faqs' | 'about';
+
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'home' | 'portfolio' | 'about'>('home');
+  const [activeTab, setActiveTab] = useState<TabType>('home');
   const [showHeader, setShowHeader] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [catalogFilter, setCatalogFilter] = useState<'All' | 'Residential' | 'Commercial' | 'Office'>('All');
@@ -330,18 +338,23 @@ export default function App() {
               </button>
 
               {/* Nav Links */}
-              <nav className="flex items-center gap-3 md:gap-6">
+              <nav className="flex items-center gap-1.5 lg:gap-3 flex-wrap">
                 {[
                   { id: 'home', label: 'Explore' },
+                  { id: 'hero', label: 'Banner Slider' },
+                  { id: 'why-us', label: 'Why Us' },
+                  { id: 'process', label: 'Process' },
                   { id: 'portfolio', label: 'Portfolio' },
+                  { id: 'testimonials', label: 'Testimonials' },
+                  { id: 'faqs', label: 'FAQs' },
                   { id: 'about', label: 'About' }
                 ].map((tab) => {
                   const isActive = activeTab === tab.id;
                   return (
                     <button
                       key={tab.id}
-                      onClick={() => setActiveTab(tab.id as any)}
-                      className={`relative py-2 px-4 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 cursor-pointer ${
+                      onClick={() => setActiveTab(tab.id as TabType)}
+                      className={`relative py-1.5 px-3 rounded-full text-[11px] font-bold uppercase tracking-[0.1em] transition-all duration-300 cursor-pointer ${
                         isActive 
                           ? 'bg-[#24140E] text-[#FAF6F0] border border-[#3D2318]/50 shadow-[0_10px_20px_-4px_rgba(24,12,6,0.45),_inset_0_2.5px_4px_rgba(255,255,255,0.32),_inset_0_-4.5px_9px_rgba(0,0,0,0.75)]' 
                           : 'text-[#8D6E63] hover:text-[#2B1A14] hover:bg-[#FAF6F0] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.6),_inset_0_-2px_4px_rgba(180,150,130,0.15)]'
@@ -450,10 +463,15 @@ export default function App() {
               </div>
 
               {/* Navigation Links */}
-              <nav className="flex flex-col gap-2.5">
+              <nav className="flex flex-col gap-2">
                 {[
                   { id: 'home', label: 'Explore Showcase' },
+                  { id: 'hero', label: 'Top Hero Banner Slider' },
+                  { id: 'why-us', label: 'Why Choose Us' },
+                  { id: 'process', label: 'Our 5-Step Process' },
                   { id: 'portfolio', label: 'Portfolio Gallery' },
+                  { id: 'testimonials', label: 'Testimonials & Reviews' },
+                  { id: 'faqs', label: 'FAQs & Answers' },
                   { id: 'about', label: 'About Studio' }
                 ].map((tab) => {
                   const isActive = activeTab === tab.id;
@@ -461,10 +479,10 @@ export default function App() {
                     <button
                       key={tab.id}
                       onClick={() => {
-                        setActiveTab(tab.id as any);
+                        setActiveTab(tab.id as TabType);
                         setMobileMenuOpen(false);
                       }}
-                      className={`w-full min-h-[50px] px-5 rounded-2xl text-xs font-bold uppercase tracking-[0.15em] text-left flex items-center justify-between transition-all cursor-pointer ${
+                      className={`w-full min-h-[46px] px-4 rounded-xl text-xs font-bold uppercase tracking-[0.12em] text-left flex items-center justify-between transition-all cursor-pointer ${
                         isActive 
                           ? 'bg-[#24140E] text-[#FAF6F0] shadow-md border border-[#3D2318]/50' 
                           : 'bg-white text-[#2B1A14] border border-[#EBE3DB] hover:bg-[#F3EBE3]'
@@ -524,11 +542,14 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.5 }}
-              className="space-y-16 md:space-y-28"
+              className="space-y-16 md:space-y-24"
             >
+              {/* TOP BANNER / HERO SLIDER */}
+              <HeroSlider onOpenLightbox={openLightbox} />
+
               {/* HERO BLOCK: Elegant, oversized handwritten branding with action pills */}
-              <div className="text-center max-w-4xl mx-auto space-y-5 md:space-y-6 pt-2 md:pt-6">
-                <h1 id="hero-al-hammad-text" className="font-hand text-5xl sm:text-7xl md:text-[9.5rem] text-[#2B1A14] font-bold tracking-tight leading-none break-words">
+              <div className="text-center max-w-4xl mx-auto space-y-5 md:space-y-6 pt-2 md:pt-4">
+                <h1 id="hero-al-hammad-text" className="font-hand text-5xl sm:text-7xl md:text-[8.5rem] text-[#2B1A14] font-bold tracking-tight leading-none break-words">
                   Al-Hammad
                 </h1>
                 <p className="font-sans text-xs sm:text-sm md:text-lg text-[#8D6E63] font-light max-w-2xl mx-auto leading-relaxed px-2 sm:px-0">
@@ -552,73 +573,23 @@ export default function App() {
                 </div>
               </div>
 
-              {/* INTERACTIVE HEADING CANVAS */}
-              <div 
-                ref={headerTrailRef} 
-                className="hidden md:block relative pt-16 pb-16 sm:pt-32 sm:pb-28 md:pt-48 md:pb-44 text-center space-y-5 overflow-visible cursor-crosshair group select-none"
-              >
-                <ImageTrail
-                  parentRef={headerTrailRef}
-                  variant={3}
-                  items={[
-                    "https://i.postimg.cc/DwWVRR1t/trial-1.webp",
-                    "https://i.postimg.cc/kgVrLLWH/trial-2.webp",
-                    "https://i.postimg.cc/bwGX441W/trial-3.webp",
-                    "https://i.postimg.cc/VkSy22jP/trial-4.webp",
-                    "https://i.postimg.cc/L8qdGGzM/trial-5.webp",
-                    "https://i.postimg.cc/x1krBBK2/trial-6.webp",
-                    "https://i.postimg.cc/4N2kLXhZ/trial-7.webp",
-                    "https://i.postimg.cc/K8KXCCtV/trial-8.webp"
-                  ]}
-                />
-                
-                <div className="relative z-10 space-y-4 pointer-events-none">
-                  <span className="font-hand text-xl sm:text-2xl md:text-3xl text-[#8D6E63]/90 italic tracking-wide hidden md:block">
-                    Move your cursor!
-                  </span>
-                  <h3 className="text-3xl sm:text-5xl md:text-7xl font-hand text-[#2B1A14] leading-tight font-bold">
-                    Explore What We Build
-                  </h3>
-                  <p className="text-xs md:text-sm text-[#8D6E63] font-light max-w-md mx-auto leading-relaxed px-2 sm:px-0">
-                    From handcrafted walnut woodwork to full-scale site orchestration, every space is designed with masterly care.
-                  </p>
-                  
-                  {/* Two Buttons centered side-by-side with pointer-events-auto */}
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-6 pointer-events-auto">
-                    <a 
-                      href={`https://wa.me/${STUDIO_INFO.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent("Hello Al-Hammad Interiors! I would like to book a design consultation for my project.")}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full sm:w-auto min-h-[48px] bg-[#24140E] hover:bg-[#341e14] text-[#FAF6F0] px-7 py-3 rounded-full text-xs font-bold uppercase tracking-[0.12em] transition-all duration-300 border border-[#3D2318]/50 shadow-md active:translate-y-0 cursor-pointer inline-flex items-center justify-center gap-2"
-                    >
-                      <Phone className="w-3.5 h-3.5 text-[#C5A880]" />
-                      <span>Book Consultation</span>
-                    </a>
-                    <a 
-                      href="#catalog-section"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        catalogRef.current?.scrollIntoView({ behavior: 'smooth' });
-                      }}
-                      className="w-full sm:w-auto min-h-[48px] bg-[#FAF6F0] hover:bg-[#F3EBE3] text-[#24140E] px-7 py-3 rounded-full text-xs font-bold uppercase tracking-[0.12em] border border-[#EBE3DB] transition-all duration-300 shadow-sm cursor-pointer inline-flex items-center justify-center gap-1.5"
-                    >
-                      Explore Portfolio
-                    </a>
-                  </div>
-                </div>
-              </div>
+              {/* WHY CHOOSE US SECTION */}
+              <WhyChooseUs />
+
+              {/* PROCESS WORKFLOW SECTION */}
+              <ProcessWorkflow />
 
               {/* PORTFOLIO SHOWCASE SECTION */}
               <div id="catalog-section" className="space-y-12 relative overflow-visible" ref={catalogRef}>
                 <div className="text-center relative z-10 space-y-3">
                   <span className="text-xs font-bold text-[#8D6E63] uppercase tracking-[0.25em] block">Our Architectural & Interior Projects</span>
-                  <h2 className="text-4xl md:text-6xl font-hand text-[#2B1A14] font-bold">Portfolio</h2>
+                  <h2 className="text-4xl md:text-6xl font-hand text-[#2B1A14] font-bold">Portfolio Showcase</h2>
                   <p className="text-xs md:text-sm text-[#8D6E63] font-light max-w-md mx-auto leading-relaxed">
                     Explore our showcase of bespoke architectural projects, custom joinery, and signature interior spaces.
                   </p>
                 </div>
 
-                {/* Portfolio Spaces Grid - 2 columns on mobile, 3 on lg with centered layout for incomplete rows */}
+                {/* Portfolio Spaces Grid */}
                 <div className="flex flex-wrap justify-center gap-3 sm:gap-6 md:gap-8">
                   {PROJECTS.slice(0, 6).map((project, index) => (
                     <div 
@@ -627,7 +598,6 @@ export default function App() {
                       className="bg-white border border-[#EBE3DB] rounded-[20px] sm:rounded-[32px] p-2.5 sm:p-4 hover:shadow-xl transition-all duration-500 group flex flex-col justify-between cursor-pointer w-[calc((100%-12px)/2)] sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-64px)/3)]"
                     >
                       <div className="space-y-2 sm:space-y-4">
-                        {/* Img Container */}
                         <div className="aspect-[4/3] rounded-[14px] sm:rounded-[24px] overflow-hidden relative group/img">
                           <img 
                             src={project.image} 
@@ -640,7 +610,6 @@ export default function App() {
                           </div>
                         </div>
 
-                        {/* Title & Description centered */}
                         <div className="px-1 sm:px-2 space-y-1 sm:space-y-2 text-center">
                           <h4 className="font-hand text-base sm:text-2xl text-[#2B1A14] leading-tight group-hover:text-[#8D6E63] transition-colors">{project.title}</h4>
                           <p className="text-[11px] sm:text-xs text-[#8D6E63] font-light leading-relaxed line-clamp-2 h-7 sm:h-10">{project.description}</p>
@@ -650,25 +619,24 @@ export default function App() {
                   ))}
                 </div>
 
-                {/* See More Button linking to /portfolio */}
-                <div className="flex justify-center pt-4">
+                <div className="flex justify-center pt-2">
                   <button
-                    onClick={() => {
-                      setActiveTab('portfolio');
-                      if (window.location.pathname !== '/portfolio') {
-                        window.history.pushState(null, '', '/portfolio');
-                      }
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    className="inline-flex items-center gap-2 bg-[#24140E] hover:bg-[#341e14] text-[#FAF6F0] px-9 py-4 rounded-full text-xs font-bold uppercase tracking-[0.18em] transition-all duration-300 border border-[#3D2318]/50 shadow-[0_16px_32px_-6px_rgba(24,12,6,0.5),_0_6px_12px_-3px_rgba(24,12,6,0.35),_inset_0_3px_5px_rgba(255,255,255,0.3),_inset_0_-5px_10px_rgba(0,0,0,0.75)] hover:-translate-y-0.5 hover:shadow-[0_22px_40px_-6px_rgba(24,12,6,0.6)] cursor-pointer"
+                    onClick={() => setActiveTab('portfolio')}
+                    className="inline-flex items-center gap-2 bg-[#24140E] hover:bg-[#341e14] text-[#FAF6F0] px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-[0.18em] transition-all duration-300 border border-[#3D2318]/50 shadow-md cursor-pointer"
                   >
-                    <span>See More</span>
+                    <span>View All Projects</span>
                     <ChevronRight className="w-4 h-4 text-[#C5A880]" />
                   </button>
                 </div>
               </div>
 
-              {/* BEYOND THE CUP / BLUEPRINT SECTION */}
+              {/* TESTIMONIALS SECTION */}
+              <TestimonialsSection />
+
+              {/* FAQS SECTION */}
+              <FaqSection />
+
+              {/* BEYOND THE BLUEPRINT SECTION */}
               <div className="space-y-12 pt-6">
                 <div className="text-center space-y-3">
                   <span className="text-xs font-bold text-[#8D6E63] uppercase tracking-[0.25em] block">In-House Quality</span>
@@ -712,64 +680,80 @@ export default function App() {
                 </div>
               </div>
 
-              {/* SECTION: Quick Highlights list and Showroom detail */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white border border-[#EBE3DB] rounded-[32px] p-6 md:p-12 shadow-lg">
-                <div className="space-y-8">
-                  <div className="space-y-3">
-                    <span className="text-xs font-bold text-[#8D6E63] uppercase tracking-[0.25em] block">Studio Standards</span>
-                    <h3 className="text-4xl md:text-5xl font-hand text-[#2B1A14]">The Al-Hammad Hallmark</h3>
-                  </div>
+            </motion.div>
+          )}
 
-                  <div className="space-y-6">
-                    {[
-                      {
-                        title: "In-House Wood & Metal Workshop",
-                        desc: "We own and operate a premium joinery showroom in Karachi Block 13D-1, allowing strict supervision of lacquer levels, joint sturdiness, and polish depth."
-                      },
-                      {
-                        title: "No Hidden Costs - Itemized Transparency",
-                        desc: "Every contract includes meticulous lumber sizing, structural hardware counts (Hettich / Blum imports), and labor breakdown, so you know exactly where your rupee travels."
-                      },
-                      {
-                        title: "12-Month Structural Integrity Warranty",
-                        desc: "We stand with absolute confidence behind our custom wardrobes, hydraulic beds, and wall panel assemblies, offering full support to DHA, Clifton, and Gulshan clients."
-                      }
-                    ].map((h, i) => (
-                      <div key={i} className="flex gap-4">
-                        <div className="w-6 h-6 rounded-full bg-[#FAF6F0] text-[#2B1A14] flex items-center justify-center shrink-0 border border-[#EBE3DB] mt-0.5">
-                          <Check className="w-3.5 h-3.5 stroke-[2.5]" />
-                        </div>
-                        <div>
-                          <h4 className="font-sans font-semibold text-base text-[#2B1A14]">{h.title}</h4>
-                          <p className="text-xs text-[#8D6E63] mt-1 leading-relaxed font-light">{h.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div 
-                  onClick={() => openLightbox([SHOWROOM_LIGHTBOX_ITEM], 0)}
-                  className="relative rounded-[24px] overflow-hidden h-[400px] border border-[#EBE3DB] shadow-md cursor-pointer group"
-                >
-                  <img 
-                    src={SHOWROOM_LIGHTBOX_ITEM.image} 
-                    alt="Gulshan-e-Iqbal Workshop Al-Hammad" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#2B1A14] via-[#2B1A14]/20 to-transparent" />
-                  <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md text-white p-2.5 rounded-full border border-white/20 shadow-lg group-hover:scale-110 transition-transform">
-                    <Maximize2 className="w-4 h-4 text-[#C5A880]" />
-                  </div>
-                  <div className="absolute bottom-8 left-8 text-[#FAF6F0] space-y-1.5">
-                    <span className="text-[9px] uppercase tracking-[0.25em] text-[#C5A880] block font-bold">Gulshan Showroom</span>
-                    <h4 className="font-hand text-2xl font-medium">In-House Manufacturing</h4>
-                    <p className="text-xs text-stone-300 font-light max-w-sm">Custom timber and fluted panels made locally with premium finishes. Click to expand popup view.</p>
-                  </div>
-                </div>
+          {/* DEDICATED TAB 2: HERO BANNER SLIDER */}
+          {activeTab === 'hero' && (
+            <motion.div
+              key="hero-tab"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.5 }}
+              className="space-y-8"
+            >
+              <div className="text-center max-w-2xl mx-auto space-y-3">
+                <span className="text-xs font-bold text-[#8D6E63] uppercase tracking-[0.25em] block">Signature Showcase</span>
+                <h2 className="text-4xl md:text-6xl font-hand text-[#2B1A14]">Top Hero Showcase</h2>
+                <p className="text-xs md:text-sm text-[#8D6E63] leading-relaxed font-light">
+                  Interactive showcase slider highlighting our signature luxury bedroom suites, dining sanctuaries, and joinery masterpieces.
+                </p>
               </div>
 
+              <HeroSlider onOpenLightbox={openLightbox} />
+            </motion.div>
+          )}
+
+          {/* DEDICATED TAB 3: WHY CHOOSE US */}
+          {activeTab === 'why-us' && (
+            <motion.div
+              key="why-us-tab"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.5 }}
+            >
+              <WhyChooseUs />
+            </motion.div>
+          )}
+
+          {/* DEDICATED TAB 4: PROCESS WORKFLOW */}
+          {activeTab === 'process' && (
+            <motion.div
+              key="process-tab"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.5 }}
+            >
+              <ProcessWorkflow />
+            </motion.div>
+          )}
+
+          {/* DEDICATED TAB 5: TESTIMONIALS */}
+          {activeTab === 'testimonials' && (
+            <motion.div
+              key="testimonials-tab"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.5 }}
+            >
+              <TestimonialsSection />
+            </motion.div>
+          )}
+
+          {/* DEDICATED TAB 6: FAQS */}
+          {activeTab === 'faqs' && (
+            <motion.div
+              key="faqs-tab"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.5 }}
+            >
+              <FaqSection />
             </motion.div>
           )}
 

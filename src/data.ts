@@ -1,4 +1,4 @@
-import { Project, MaterialTexture, QuizQuestion, Review } from './types';
+import { Project, MaterialTexture, QuizQuestion, Review, HeroSlide, FaqItem, ProcessStep, WhyChooseUsItem } from './types';
 
 export const STUDIO_INFO = {
   name: "Al-Hammad Interiors & Architecture",
@@ -14,7 +14,195 @@ export const STUDIO_INFO = {
   address: "Showroom # R-69, Railway Housing Society Project, Block 13D-1, Gulshan-e-Iqbal, Karachi 75300, Pakistan",
   coords: { lat: 24.9142, lng: 67.0822 },
   status: "Open • Mon to Sat (11:00 AM - 9:00 PM)"
-};export const PROJECTS: Project[] = [
+};
+
+export const HERO_SLIDES: HeroSlide[] = [
+  {
+    id: "slide-1",
+    title: "Bespoke Warm Luxury Bedrooms",
+    subtitle: "Custom Upholstery, Fluted Timber Panels & Integrated Ambient Lighting",
+    tagline: "Signature Master Suite Architecture",
+    location: "DHA Phase VIII, Karachi",
+    image: "https://i.postimg.cc/VvY9CQYt/image.webp",
+    badge: "Featured Masterwork",
+    projectId: "walnut-residence"
+  },
+  {
+    id: "slide-2",
+    title: "Gold & Marble Dining Sanctuaries",
+    subtitle: "Bookmatched Travertine Walls, Polished Flooring & Warm Metallic Accents",
+    tagline: "High-End Entertaining Spaces",
+    location: "Clifton Block 4, Karachi",
+    image: "https://i.postimg.cc/yxVhZ4VJ/image-(4).webp",
+    badge: "Architectural Marvel",
+    projectId: "executive-lounge"
+  },
+  {
+    id: "slide-3",
+    title: "In-House Walnut Joinery & Cabinetry",
+    subtitle: "Smoked Veneers, Solid Wood Polish & Soft-Close Blum Hardware",
+    tagline: "Gulshan Workshop Craftsmanship",
+    location: "Gulshan-e-Iqbal, Karachi",
+    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1400",
+    badge: "In-House Workshop",
+    projectId: "walnut-residence"
+  },
+  {
+    id: "slide-4",
+    title: "Contemporary Fluted Wall Architecture",
+    subtitle: "Indirect Vertical Linear LEDs, Accent Mirrors & Custom Floating Vanity",
+    tagline: "Refined Modern Elegance",
+    location: "PECHS Block 6, Karachi",
+    image: "https://i.postimg.cc/RhM1H5Mh/image-(6).webp",
+    badge: "Trending 2025",
+    projectId: "bronze-oasis-bedroom"
+  }
+];
+
+export const WHY_CHOOSE_US_ITEMS: WhyChooseUsItem[] = [
+  {
+    id: "workshop",
+    title: "In-House Gulshan Joinery Workshop",
+    description: "0% middleman commission. We operate our own state-of-the-art joinery facility in Gulshan-e-Iqbal Block 13D-1, manufacturing custom walnut wardrobes, fluted wall panels, and hydraulic beds.",
+    highlight: "Direct Factory Pricing",
+    iconName: "Building"
+  },
+  {
+    id: "turnkey",
+    title: "Complete Turnkey Orchestration",
+    description: "Single-point accountability for civil works, masonry, ceiling framework, electrical routing, plumbing, and final lacquer polish. No supervisor coordination hassle for clients.",
+    highlight: "100% Hassle-Free",
+    iconName: "Layers"
+  },
+  {
+    id: "blueprints",
+    title: "Photorealistic 3D Renders & Blueprints",
+    description: "See exact lighting levels, material grains, and spatial circulation before moving a single brick. Every mm is measured to avoid costly on-site surprises.",
+    highlight: "Exact Preview First",
+    iconName: "Compass"
+  },
+  {
+    id: "warranty",
+    title: "10-Year Structural Timber Warranty",
+    description: "We use moisture-resistant MDF, kiln-dried solid hardwood, and original Blum/Hettich German hardware fittings built to withstand Karachi's humid coastal climate.",
+    highlight: "10-Year Guarantee",
+    iconName: "Award"
+  },
+  {
+    id: "boq",
+    title: "Transparent PKR Pricing & BOQ",
+    description: "Detailed itemized Bill of Quantities with zero hidden fees. Fixed contract pricing ensures your budget stays 100% protected throughout execution.",
+    highlight: "No Budget Surprises",
+    iconName: "Calculator"
+  },
+  {
+    id: "experience",
+    title: "14+ Years Legacy in Karachi",
+    description: "Over 250+ completed luxury villa interiors and corporate offices in DHA, Clifton, PECHS, Gulshan, and KDA Scheme 1 since 2012.",
+    highlight: "250+ Projects Handed Over",
+    iconName: "Sparkles"
+  }
+];
+
+export const PROCESS_STEPS: ProcessStep[] = [
+  {
+    step: 1,
+    title: "Free Site Audit & Spatial Consultation",
+    subtitle: "In-Person Inspection & Client Vision Alignment",
+    description: "Our senior architect visits your property in Karachi to conduct laser measuring, analyze structural layout, assess lighting orientation, and discuss your lifestyle requirements.",
+    duration: "1 - 2 Days",
+    deliverables: ["Site Measurement Plan", "Initial Concept Brief", "Budget Outline"],
+    icon: "MapPin"
+  },
+  {
+    step: 2,
+    title: "Photorealistic 3D Renders & BOQ",
+    subtitle: "High-Resolution Visuals & Itemized Costing",
+    description: "We craft full 3D visual walkthroughs depicting exact timber finishes, lighting temperature, and custom furniture. We provide a comprehensive itemized Bill of Quantities (BOQ).",
+    duration: "5 - 7 Days",
+    deliverables: ["High-Res 3D Renders", "Material Selection Board", "Fixed Itemized BOQ"],
+    icon: "Compass"
+  },
+  {
+    step: 3,
+    title: "Material Sourcing & Client Approval",
+    subtitle: "Live Samples Inspection at Gulshan Showroom",
+    description: "You visit our Gulshan showroom to touch and inspect live veneer cuts, natural travertine slabs, upholstery fabrics, lacquer polish samples, and German soft-close fittings.",
+    duration: "2 - 3 Days",
+    deliverables: ["Sample Board Signoff", "Hardware Specifications", "Project Schedule"],
+    icon: "Sliders"
+  },
+  {
+    step: 4,
+    title: "In-House Workshop Fabrication & On-Site Fitout",
+    subtitle: "Precision Joinery & Dedicated Site Supervision",
+    description: "Custom wardrobes, kitchens, and fluted screens are fabricated in our Gulshan workshop under strict humidity control, while site supervisors coordinate ceiling, electrical, and civil work.",
+    duration: "3 - 8 Weeks",
+    deliverables: ["Milestone Updates", "Quality Testing", "Dust-Free Installation"],
+    icon: "Building"
+  },
+  {
+    step: 5,
+    title: "Final Polish, Inspection & Turnkey Handover",
+    subtitle: "Deep Cleaning & 10-Year Warranty Issuance",
+    description: "We conduct a detailed 50-point quality audit, fine-tune cabinet alignments, apply final lacquer touchups, perform site deep cleaning, and hand over your ready-to-move sanctuary.",
+    duration: "2 - 3 Days",
+    deliverables: ["50-Point Audit Signoff", "10-Year Warranty Card", "Care & Maintenance Guide"],
+    icon: "Check"
+  }
+];
+
+export const FAQS: FaqItem[] = [
+  {
+    id: "faq-1",
+    category: "Pricing & BOQ",
+    question: "How do you calculate interior design costs for Karachi homes?",
+    answer: "Costs are calculated based on covered area (sq. ft.) and selected finishes. Design-only consultations start at PKR 150 - 220 per sq. ft., while full turnkey fitouts (including custom joinery, ceilings, lighting, and polish) range from PKR 2,800 to PKR 4,500+ per sq. ft. depending on whether you choose solid walnut, oak veneers, or premium imported marble."
+  },
+  {
+    id: "faq-2",
+    category: "Execution & Timeline",
+    question: "What is the typical completion timeline for a 3-bedroom apartment vs a villa?",
+    answer: "A complete 3-bedroom apartment turnkey project in Karachi typically takes 4 to 6 weeks. Larger 500 sq yd or 1,000 sq yd luxury villas in DHA or Clifton take between 8 to 14 weeks from 3D design approval to final handover."
+  },
+  {
+    id: "faq-3",
+    category: "Workshop & Manufacturing",
+    question: "Where is your joinery workshop located? Can clients visit?",
+    answer: "Yes! Our in-house manufacturing workshop and showroom are located at Block 13D-1, Gulshan-e-Iqbal, Karachi. Clients are welcome to visit Monday to Saturday (11 AM to 9 PM) to see ongoing joinery manufacturing, inspect live timber samples, and verify polish quality."
+  },
+  {
+    id: "faq-4",
+    category: "Warranty & Materials",
+    question: "What warranty do you provide on custom wardrobes and kitchens?",
+    answer: "We provide a 10-Year Structural Timber Warranty against termites and wood warping, and honor original German Blum/Hettich lifetime replacement warranties on soft-close hardware fittings."
+  },
+  {
+    id: "faq-5",
+    category: "Design & Renders",
+    question: "Do you provide 3D visual renders before starting on-site work?",
+    answer: "Absolutely. Before any site work or workshop cutting begins, we present photorealistic 3D visual renders showing exact colors, textures, furniture layouts, and lighting so you can visualize your completed home with 100% confidence."
+  },
+  {
+    id: "faq-6",
+    category: "Pricing & BOQ",
+    question: "Are there any hidden costs after signing the BOQ?",
+    answer: "No. Our Bill of Quantities (BOQ) is fixed and transparent. Unless you explicitly request a scope change or upgraded material mid-project, the price agreed upon at signing is the exact price you pay."
+  },
+  {
+    id: "faq-7",
+    category: "Execution & Timeline",
+    question: "Do you handle civil, electrical, plumbing, and ceiling works as well?",
+    answer: "Yes, as a full turnkey interior design firm, we handle civil alterations, pop false ceilings, electrical rewiring, ambient LED strip channels, plumbing, tile laying, wall panelling, and final painting under a single supervisor team."
+  },
+  {
+    id: "faq-8",
+    category: "Warranty & Materials",
+    question: "How do you protect wood joinery against Karachi's humid climate?",
+    answer: "We use high-density moisture-resistant (HDMR) green board cores, sealed polyurethane lacquer polishes, and moisture barriers behind wall paneling to ensure zero swelling or dampness damage."
+  }
+];
+export const PROJECTS: Project[] = [
   {
     id: "walnut-residence",
     title: "Contemporary Luxury Bedroom",
