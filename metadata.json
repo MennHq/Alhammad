@@ -1,0 +1,6 @@
+{
+  "name": "Al-Hammad Interiors & Architecture",
+  "description": "A premium, immersive interior design & architecture website featuring clean brown modern aesthetics, rich material palettes, and active custom spaces.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

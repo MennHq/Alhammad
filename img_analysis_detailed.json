@@ -1,0 +1,125 @@
+{
+  "walnut-residence": {
+    "title": "Contemporary Neutral Tone Luxury Bedroom",
+    "description": "This elegantly designed master bedroom exudes contemporary luxury, blending a serene, warm neutral color palette with sophisticated, clean-lined furnishings. A plush upholstered platform bed styled with chocolate brown and crisp white linens serves as the focal point, complemented by a pair of curved grey velvet armchairs and a sleek dark glass coffee table resting on a textured, marble-patterned rug. The seamless integration of glass-fronted wardrobes and soft wall paneling enhances the spacious, upscale ambiance of the room.",
+    "features": [
+      "Glass-fronted built-in wardrobes",
+      "Curved velvet accent armchairs",
+      "Textured marble-patterned area rug",
+      "Warm neutral and chocolate color palette"
+    ]
+  },
+  "gourmet-kitchen": {
+    "title": "Sophisticated Warm Neutral Bedroom with Metallic Accents",
+    "description": "This elegant bedroom showcases a warm, sophisticated palette of cream, taupe, and beige, anchored by a custom wall-mounted headboard featuring vertical paneling and polished rose gold metallic inserts. Floating nightstands with luxurious marble tops frame the plush, textured bed to maximize visual floor space. Soft, floor-to-ceiling pleated drapery and a subtly patterned area rug complete the serene, high-end sanctuary.",
+    "features": [
+      "Custom wall paneling with rose gold inlays",
+      "Floating nightstands with marble tops",
+      "Layered neutral bedding with textures",
+      "Floor-to-ceiling pleated drapery"
+    ]
+  },
+  "executive-lounge": {
+    "title": "Elegant Gold-Accented Marble Dining Room",
+    "description": "This sophisticated dining space exudes modern luxury, anchored by a striking bookmatched marble feature wall and seamless polished marble flooring. A sleek gold-finished dining table is paired with elegantly curved, textured cream chairs featuring matching metallic legs. Tall, flowing drapery and a neutral color palette create a warm, grand, and inviting atmosphere perfect for upscale entertaining.",
+    "features": [
+      "Bookmatched marble accent wall",
+      "Gold-finished metallic dining set",
+      "Textured curved dining chairs",
+      "Polished marble flooring"
+    ]
+  },
+  "bronze-oasis-bedroom": {
+    "title": "Modern Luxury Bedroom with Fluted Panels and Linear Art",
+    "description": "This luxurious contemporary bedroom showcases a sophisticated balance of textures, featuring a plush cream upholstered bed set against an elegant feature wall composed of dark fluted panels and organic line art. Warm, indirect lighting from vertical LED strips, modern gold pendants, and a backlit vanity mirror creates an inviting, serene atmosphere. The space is completed with stylish matching nightstands, a large textured area rug, and a chic round coffee table with brass accents in the foreground.",
+    "features": [
+      "Symmetrical dark fluted wall panels with integrated LED lighting",
+      "Minimalist organic black line art headboard feature wall",
+      "Modern gold pendant lights and matching off-white nightstands",
+      "Plush cream upholstered bed frame with luxury neutral bedding"
+    ]
+  },
+  "commercial-showroom": {
+    "title": "Modern Organic Nested Coffee Tables",
+    "description": "This sophisticated living room setup features a pair of organic-shaped nested coffee tables, combining a warm walnut wood surface and a clean white top framed in sleek dark upholstered bases. Resting on a plush, textured abstract-patterned beige rug, the tables are elegantly styled with a decorative wooden tray, a reed diffuser, and a minimalist book stand. In the background, a low-profile floating media console and a soft cream sofa complete the warm, harmonious, and highly refined contemporary atmosphere.",
+    "features": [
+      "Organic-shaped nested coffee tables",
+      "Textured abstract-patterned area rug",
+      "Low-profile floating media console",
+      "Warm neutral color palette"
+    ]
+  },
+  "bespoke-living-lounge": {
+    "title": "Moody Contemporary Dining Room with Fluted Wood Panels",
+    "description": "This sophisticated dining room features a striking accent wall of vertical fluted wood paneling that frames a surrealist portrait, setting a moody and artistic tone. At its center, a polished marble-topped dining table is surrounded by elegant curved dining chairs upholstered in taupe and cream, illuminated by warm recessed and cove lighting. A dramatic black marble accent wall with a sleek console table and round mirror adds depth, completing the luxurious, high-end atmosphere.",
+    "features": [
+      "Fluted wood paneling",
+      "Polished marble dining table",
+      "Curved velvet dining chairs",
+      "Black marble accent wall"
+    ]
+  },
+  "arch-villa-dining": {
+    "title": "Olive Green and Walnut Contemporary Master Suite",
+    "description": "This luxurious master bedroom seamlessly integrates a plush sleeping area with a sophisticated lounge zone, creating an atmosphere of refined comfort. Earthy olive green upholstery and rich walnut wall paneling are balanced by a striking geometric accent wall and elegant herringbone hardwood floors. Warm recessed lighting, designer table lamps, and a marble-based side table add a layer of polished, upscale texture to the space.",
+    "features": [
+      "Herringbone hardwood flooring",
+      "Geometric patterned accent wall",
+      "Channel-tufted upholstered bed bench",
+      "Integrated lounge seating area"
+    ]
+  },
+  "executive-suite": {
+    "title": "Modern Earth-Toned Master Bedroom with Fluted Accents",
+    "description": "This elegant master bedroom showcases a sophisticated palette of olive green, warm walnut paneling, and rich herringbone wood flooring. Soft, indirect cove lighting combines with stylish abstract-patterned table lamps to cast a warm, inviting glow across the cohesive layout, which features a plush upholstered bed and coordinating end bench. The harmonious blend of textures, from the vertical fluted wall accents to the layered drapery, establishes a serene and luxurious sanctuary.",
+    "features": [
+      "Herringbone wood flooring",
+      "Walnut wood paneling and fluted accents",
+      "Olive-toned upholstered bed and matching bench",
+      "Indirect cove and recessed ceiling lighting"
+    ]
+  },
+  "custom-wardrobe-suite": {
+    "error": "{\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}"
+  },
+  "travertine-lounge": {
+    "title": "Contemporary Athletic-Inspired Teen Bedroom",
+    "description": "This contemporary teen bedroom seamlessly balances a playful soccer theme with a sophisticated, modern aesthetic using a refined color palette of slate blue, cool grey, and crisp white. High-end finishes define the space, from the luxurious white marble flooring and geometric-patterned area rug to the plush upholstered platform bed and matching fluted wall paneling. Ambient cove lighting illuminates a striking backlit silhouette of a soccer player on the headboard wall, casting a soft, warm glow that enhances the room's dynamic yet cozy atmosphere.",
+    "features": [
+      "Backlit sports-themed wall art",
+      "Fluted accent wall paneling",
+      "White marble flooring",
+      "Custom upholstered platform bed"
+    ]
+  },
+  "acoustic-timber-residence": {
+    "title": "Luxurious Warm-Toned Living Room with Marble Feature Wall",
+    "description": "This luxurious contemporary living room features a sophisticated conversational layout anchored by plush, textured cream sofas, a distinctive houndstooth armchair, and nested brass-based coffee tables. A dramatic dark veined marble feature wall serves as a striking backdrop, beautifully complemented by warm wood paneling, rich terracotta drapery, and a large patterned area rug. Sculptural gold pendant lights and warm recessed cove lighting cast a soft, inviting glow, creating an opulent yet comfortable atmosphere.",
+    "features": [
+      "Dramatic dark marbled accent wall",
+      "Sculptural gold ribbon pendant lights",
+      "Plush cream and houndstooth upholstery",
+      "Nested coffee tables with gold-finished bases"
+    ]
+  },
+  "fluted-vitrine-gallery": {
+    "title": "Opulent Contemporary Bedroom with Bookmatched Marble and Fluted Paneling",
+    "description": "This opulent bedroom showcases a striking bookmatched marble feature wall framed by polished brass panels, creating a dramatic and elegant focal point behind a plush, curved camel-colored headboard. The sophisticated atmosphere is enhanced by a magnificent cascading crystal chandelier, fluted wall paneling, and a reflective ceiling detail that amplifies the sense of scale and luxury. Tactile elements like the velvet upholstery, textured area rug, and contemporary furnishings blend seamlessly with warm, layered lighting to curate a cozy yet grand sanctuary.",
+    "features": [
+      "Bookmatched marble feature wall",
+      "Curved plush channel-tufted headboard",
+      "Cascading crystal chandelier",
+      "Vertical fluted wall paneling"
+    ]
+  },
+  "sculptural-plaster-nook": {
+    "title": "Sophisticated Contemporary Dining Room with Marble Accents",
+    "description": "This sophisticated dining room seamlessly blends modern luxury with elegant design, featuring a stunning polished marble floor with contrasting borders and a sleek marble-topped dining table. Plush gray upholstered dining chairs provide comfortable seating beneath a striking branching glass-globe chandelier, while a fluted wood accent wall with integrated light strips adds depth and warmth. The space is further elevated by a large abstract painting and reflective mirrored wall panels that enhance the room's bright, open, and polished atmosphere.",
+    "features": [
+      "Polished marble flooring with inlaid borders",
+      "Branching glass-globe chandelier",
+      "Fluted wood paneling with integrated LED lighting",
+      "Upholstered modern dining armchairs"
+    ]
+  }
+}
