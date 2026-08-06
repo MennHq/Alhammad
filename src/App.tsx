@@ -44,7 +44,7 @@ import ProcessWorkflow from './components/ProcessWorkflow';
 import TestimonialsSection from './components/TestimonialsSection';
 import FaqSection from './components/FaqSection';
 
-export type TabType = 'home' | 'hero' | 'why-us' | 'process' | 'portfolio' | 'testimonials' | 'faqs' | 'about';
+export type TabType = 'home' | 'portfolio' | 'about';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabType>('home');
@@ -338,15 +338,10 @@ export default function App() {
               </button>
 
               {/* Nav Links */}
-              <nav className="flex items-center gap-1.5 lg:gap-3 flex-wrap">
+              <nav className="flex items-center gap-2">
                 {[
                   { id: 'home', label: 'Explore' },
-                  { id: 'hero', label: 'Banner Slider' },
-                  { id: 'why-us', label: 'Why Us' },
-                  { id: 'process', label: 'Process' },
                   { id: 'portfolio', label: 'Portfolio' },
-                  { id: 'testimonials', label: 'Testimonials' },
-                  { id: 'faqs', label: 'FAQs' },
                   { id: 'about', label: 'About' }
                 ].map((tab) => {
                   const isActive = activeTab === tab.id;
@@ -354,7 +349,7 @@ export default function App() {
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id as TabType)}
-                      className={`relative py-1.5 px-3 rounded-full text-[11px] font-bold uppercase tracking-[0.1em] transition-all duration-300 cursor-pointer ${
+                      className={`relative py-2 px-4 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 cursor-pointer ${
                         isActive 
                           ? 'bg-[#24140E] text-[#FAF6F0] border border-[#3D2318]/50 shadow-[0_10px_20px_-4px_rgba(24,12,6,0.45),_inset_0_2.5px_4px_rgba(255,255,255,0.32),_inset_0_-4.5px_9px_rgba(0,0,0,0.75)]' 
                           : 'text-[#8D6E63] hover:text-[#2B1A14] hover:bg-[#FAF6F0] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.6),_inset_0_-2px_4px_rgba(180,150,130,0.15)]'
@@ -463,15 +458,10 @@ export default function App() {
               </div>
 
               {/* Navigation Links */}
-              <nav className="flex flex-col gap-2">
+              <nav className="flex flex-col gap-2.5">
                 {[
                   { id: 'home', label: 'Explore Showcase' },
-                  { id: 'hero', label: 'Top Hero Banner Slider' },
-                  { id: 'why-us', label: 'Why Choose Us' },
-                  { id: 'process', label: 'Our 5-Step Process' },
                   { id: 'portfolio', label: 'Portfolio Gallery' },
-                  { id: 'testimonials', label: 'Testimonials & Reviews' },
-                  { id: 'faqs', label: 'FAQs & Answers' },
                   { id: 'about', label: 'About Studio' }
                 ].map((tab) => {
                   const isActive = activeTab === tab.id;
@@ -482,7 +472,7 @@ export default function App() {
                         setActiveTab(tab.id as TabType);
                         setMobileMenuOpen(false);
                       }}
-                      className={`w-full min-h-[46px] px-4 rounded-xl text-xs font-bold uppercase tracking-[0.12em] text-left flex items-center justify-between transition-all cursor-pointer ${
+                      className={`w-full min-h-[50px] px-5 rounded-2xl text-xs font-bold uppercase tracking-[0.15em] text-left flex items-center justify-between transition-all cursor-pointer ${
                         isActive 
                           ? 'bg-[#24140E] text-[#FAF6F0] shadow-md border border-[#3D2318]/50' 
                           : 'bg-white text-[#2B1A14] border border-[#EBE3DB] hover:bg-[#F3EBE3]'
@@ -680,80 +670,6 @@ export default function App() {
                 </div>
               </div>
 
-            </motion.div>
-          )}
-
-          {/* DEDICATED TAB 2: HERO BANNER SLIDER */}
-          {activeTab === 'hero' && (
-            <motion.div
-              key="hero-tab"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.5 }}
-              className="space-y-8"
-            >
-              <div className="text-center max-w-2xl mx-auto space-y-3">
-                <span className="text-xs font-bold text-[#8D6E63] uppercase tracking-[0.25em] block">Signature Showcase</span>
-                <h2 className="text-4xl md:text-6xl font-hand text-[#2B1A14]">Top Hero Showcase</h2>
-                <p className="text-xs md:text-sm text-[#8D6E63] leading-relaxed font-light">
-                  Interactive showcase slider highlighting our signature luxury bedroom suites, dining sanctuaries, and joinery masterpieces.
-                </p>
-              </div>
-
-              <HeroSlider onOpenLightbox={openLightbox} />
-            </motion.div>
-          )}
-
-          {/* DEDICATED TAB 3: WHY CHOOSE US */}
-          {activeTab === 'why-us' && (
-            <motion.div
-              key="why-us-tab"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.5 }}
-            >
-              <WhyChooseUs />
-            </motion.div>
-          )}
-
-          {/* DEDICATED TAB 4: PROCESS WORKFLOW */}
-          {activeTab === 'process' && (
-            <motion.div
-              key="process-tab"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.5 }}
-            >
-              <ProcessWorkflow />
-            </motion.div>
-          )}
-
-          {/* DEDICATED TAB 5: TESTIMONIALS */}
-          {activeTab === 'testimonials' && (
-            <motion.div
-              key="testimonials-tab"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.5 }}
-            >
-              <TestimonialsSection />
-            </motion.div>
-          )}
-
-          {/* DEDICATED TAB 6: FAQS */}
-          {activeTab === 'faqs' && (
-            <motion.div
-              key="faqs-tab"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.5 }}
-            >
-              <FaqSection />
             </motion.div>
           )}
 
