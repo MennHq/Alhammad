@@ -52,3 +52,9 @@ html, body {
   color: #2B1A14;
   font-family: var(--font-sans);
 }
+
+@media (max-width: 767px) {
+  body {
+    zoom: 0.8;
+  }
+}
