@@ -113,6 +113,19 @@ export default function App() {
         style: 'Full Turnkey Management',
         materials: ['Structural Steel', 'Hettich Hardware', 'Custom Electrical']
       }
+    },
+    {
+      id: 'architectural-lighting',
+      title: 'Architectural Ambient Lighting',
+      image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200',
+      category: 'Illumination',
+      location: 'Custom Ceiling & Fluting',
+      description: 'Precision cove lighting, magnetic track lights, dimmable warm architectural LEDs, and integrated acoustic wooden slat ceilings.',
+      meta: '2700K Warm LEDs • Custom Tracks',
+      specs: {
+        style: 'Integrated Illumination',
+        materials: ['2700K Linear LEDs', 'Magnetic Tracks', 'Acoustic Oak Slats']
+      }
     }
   ];
 
@@ -665,7 +678,7 @@ export default function App() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 md:gap-8">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 md:gap-8">
                   {SERVICE_LIGHTBOX_ITEMS.map((s, i) => (
                     <div 
                       key={s.id} 
