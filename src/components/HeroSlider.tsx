@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, MapPin, Sparkles, ArrowUpRight, Phone, Play, Pause } from 'lucide-react';
-import { HERO_SLIDES, STUDIO_INFO } from '../data';
+import { HERO_SLIDES, PROJECTS, STUDIO_INFO } from '../data';
 import { LightboxItem } from './ImageLightboxModal';
 
 interface HeroSliderProps {
@@ -98,7 +98,7 @@ export default function HeroSlider({ onOpenLightbox, onInquire }: HeroSliderProp
           {/* CTA Buttons */}
           <div className="pt-1 sm:pt-2 flex flex-wrap items-center gap-3">
             <a
-              href={`https://wa.me/${STUDIO_INFO.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hello Al-Hammad Interiors! I am interested in inquiring about "${currentSlide.title}".`)}`}
+              href={`https://wa.me/${STUDIO_INFO.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hello Al-Hammad Interiors! I am interested in inquiring about "${currentSlide.title}" (${currentSlide.image}).`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#C5A880] hover:bg-[#b0926a] text-[#1C1311] px-5 py-2.5 sm:px-6 sm:py-3 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all shadow-lg hover:scale-105 cursor-pointer"
@@ -110,16 +110,44 @@ export default function HeroSlider({ onOpenLightbox, onInquire }: HeroSliderProp
             {onOpenLightbox && (
               <button
                 onClick={() => {
-                  onOpenLightbox([
-                    {
-                      id: currentSlide.id,
-                      title: currentSlide.title,
-                      image: currentSlide.image,
-                      category: currentSlide.badge,
-                      location: currentSlide.location,
-                      description: currentSlide.subtitle
-                    }
-                  ], 0);
+                  const heroLightboxItems: LightboxItem[] = [
+                    ...HERO_SLIDES.map((slide) => ({
+                      id: slide.id,
+                      title: slide.title,
+                      image: slide.image,
+                      category: slide.badge,
+                      location: slide.location,
+                      description: slide.subtitle
+                    })),
+                    ...PROJECTS.flatMap((p) => {
+                      const items: LightboxItem[] = [];
+                      items.push({
+                        id: p.id,
+                        title: p.title,
+                        image: p.image,
+                        category: p.category,
+                        location: p.location,
+                        year: p.year,
+                        description: p.description,
+                        specs: p.specs,
+                        highlights: p.highlights
+                      });
+                      if (p.beforeImage) {
+                        items.push({
+                          id: `${p.id}-before`,
+                          title: `${p.title} (Original Before State)`,
+                          image: p.beforeImage,
+                          category: `${p.category} • Before Renovation`,
+                          location: p.location,
+                          year: p.year,
+                          description: `Original site condition prior to Al-Hammad Interiors turnkey architectural renovation.`,
+                          specs: p.specs
+                        });
+                      }
+                      return items;
+                    }).filter(item => !HERO_SLIDES.some(hs => hs.image === item.image))
+                  ];
+                  onOpenLightbox(heroLightboxItems, currentIndex);
                 }}
                 className="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-[#FAF6F0] backdrop-blur-md px-4 py-2.5 sm:px-5 sm:py-3 rounded-full text-xs font-semibold border border-white/20 transition-all cursor-pointer"
               >

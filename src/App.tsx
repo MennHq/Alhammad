@@ -44,10 +44,34 @@ import ProcessWorkflow from './components/ProcessWorkflow';
 import TestimonialsSection from './components/TestimonialsSection';
 import FaqSection from './components/FaqSection';
 
-export type TabType = 'home' | 'portfolio' | 'about';
+export type TabType = 'home' | 'portfolio' | 'testimonials' | 'faqs' | 'about';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabType>('home');
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (path.includes('faq') || hash.includes('faq')) {
+        setActiveTab('faqs');
+      } else if (path.includes('testimonial') || path.includes('review') || hash.includes('testimonial') || hash.includes('review')) {
+        setActiveTab('testimonials');
+      } else if (path.includes('portfolio') || hash.includes('portfolio')) {
+        setActiveTab('portfolio');
+      } else if (path.includes('about') || hash.includes('about')) {
+        setActiveTab('about');
+      }
+    };
+
+    handleLocationChange();
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
+  }, []);
   const [showHeader, setShowHeader] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [catalogFilter, setCatalogFilter] = useState<'All' | 'Residential' | 'Commercial' | 'Office'>('All');
@@ -283,242 +307,110 @@ export default function App() {
         className="pointer-events-none"
       />
 
-      {/* ALWAYS VISIBLE FLOATING 3-LINE MENU BUTTON ON MOBILE */}
-      <div className="fixed top-3.5 right-3.5 z-[9999] md:hidden">
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle Navigation Menu"
-          className="min-h-[48px] min-w-[48px] px-3.5 py-2.5 bg-[#24140E] hover:bg-[#341e14] text-[#FAF6F0] border border-[#3D2318]/70 rounded-full shadow-[0_10px_25px_-5px_rgba(24,12,6,0.6)] active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
-        >
-          {mobileMenuOpen ? (
-            <X className="w-5 h-5 text-[#C5A880]" />
-          ) : (
-            <>
-              <Menu className="w-5 h-5 text-[#C5A880]" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#FAF6F0] pr-1">Menu</span>
-            </>
-          )}
-        </button>
-      </div>
-
       {/* FLOATING HEADER NAVIGATION */}
-      {activeTab !== 'studio' && (
-        <motion.header 
-          variants={{
-            visible: { y: 0 },
-            hidden: { y: "-100%" },
-          }}
-          initial="visible"
-          animate={showHeader ? "visible" : "hidden"}
-          transition={{ duration: 0.35, ease: "easeInOut" }}
-          className="sticky top-0 z-50 bg-[#FAF6F0]/95 backdrop-blur-md border-b border-[#EBE3DB] shadow-sm w-full"
-        >
-          <div className="max-w-7xl mx-auto px-4 md:px-8 py-3.5 md:py-4">
-            
-            {/* Desktop Navbar Layout (Hidden on Mobile) */}
-            <div className="hidden md:flex flex-row justify-between items-center gap-6">
-              {/* Brand Logo Info with Organic Font & Official Emblem */}
-              <button 
-                onClick={() => { setActiveTab('home'); setMobileMenuOpen(false); }}
-                className="flex items-center gap-3 text-left focus:outline-none group"
-              >
-                <img 
-                  src="https://i.postimg.cc/qqxT1nHB/logo.webp" 
-                  alt="Al-Hammad Interiors Logo" 
-                  className="h-14 md:h-18 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-sm"
-                />
-                <div className="flex flex-col">
-                  <span className="font-hand text-2xl md:text-3xl font-bold tracking-tight text-[#2B1A14] transition-colors group-hover:text-[#8D6E63]">
-                    Al-Hammad
-                  </span>
-                  <span className="text-[8px] uppercase tracking-[0.35em] text-[#8D6E63] block mt-0.5 font-bold font-sans">
-                    Interiors & Architecture
-                  </span>
-                </div>
-              </button>
-
-              {/* Nav Links */}
-              <nav className="flex items-center gap-2">
-                {[
-                  { id: 'home', label: 'Explore' },
-                  { id: 'portfolio', label: 'Portfolio' },
-                  { id: 'about', label: 'About' }
-                ].map((tab) => {
-                  const isActive = activeTab === tab.id;
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id as TabType)}
-                      className={`relative py-2 px-4 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 cursor-pointer ${
-                        isActive 
-                          ? 'bg-[#24140E] text-[#FAF6F0] border border-[#3D2318]/50 shadow-[0_10px_20px_-4px_rgba(24,12,6,0.45),_inset_0_2.5px_4px_rgba(255,255,255,0.32),_inset_0_-4.5px_9px_rgba(0,0,0,0.75)]' 
-                          : 'text-[#8D6E63] hover:text-[#2B1A14] hover:bg-[#FAF6F0] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.6),_inset_0_-2px_4px_rgba(180,150,130,0.15)]'
-                      }`}
-                    >
-                      <span>{tab.label}</span>
-                    </button>
-                  );
-                })}
-              </nav>
-
-              {/* Google Ratings and Instant Booking CTAs */}
-              <div className="hidden lg:flex items-center gap-4">
-                <button 
-                  onClick={() => setActiveTab('about')}
-                  title="View Reviews & Studio Info"
-                  className="flex items-center gap-2 bg-[#FAF6F0] border border-[#EBE3DB] px-3.5 py-2 rounded-xl shadow-[0_6px_14px_-2px_rgba(43,26,20,0.1),_inset_0_2px_3px_rgba(255,255,255,0.9),_inset_0_-2.5px_5px_rgba(180,150,130,0.25)] hover:shadow-[0_10px_20px_-2px_rgba(43,26,20,0.15),_inset_0_2px_3px_rgba(255,255,255,1),_inset_0_-3px_6px_rgba(180,150,130,0.3)] transition-all duration-300 cursor-pointer"
-                >
-                  <div className="flex text-[#C5A880]">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-current" />
-                    ))}
-                  </div>
-                  <span className="text-[10px] font-bold text-[#2B1A14]">{STUDIO_INFO.rating}/5</span>
-                  <span className="text-[9px] text-[#8D6E63]">({STUDIO_INFO.reviewCount} Reviews)</span>
-                </button>
-
-                <a
-                  href={`https://wa.me/${STUDIO_INFO.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent("Hello Al-Hammad Interiors! I would like to request a consultation for my space.")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-[#24140E] hover:bg-[#341e14] text-[#FAF6F0] px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 border border-[#3D2318]/50 shadow-[0_14px_28px_-6px_rgba(24,12,6,0.5),_0_5px_10px_-3px_rgba(24,12,6,0.35),_inset_0_3px_5px_rgba(255,255,255,0.3),_inset_0_-5px_10px_rgba(0,0,0,0.78)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center gap-1.5 min-h-[44px]"
-                >
-                  <Phone className="w-3.5 h-3.5 text-[#C5A880]" />
-                  <span>Consultation</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Mobile Header Bar (Visible on < md screens) */}
-            <div className="flex md:hidden items-center justify-between pr-24">
-              <button 
-                onClick={() => { setActiveTab('home'); setMobileMenuOpen(false); }}
-                className="flex items-center gap-2.5 text-left focus:outline-none"
-              >
-                <img 
-                  src="https://i.postimg.cc/qqxT1nHB/logo.webp" 
-                  alt="Al-Hammad Interiors Logo" 
-                  className="h-11 w-auto object-contain drop-shadow-sm"
-                />
-                <div className="flex flex-col">
-                  <span className="font-hand text-xl font-bold tracking-tight text-[#2B1A14]">
-                    Al-Hammad
-                  </span>
-                  <span className="text-[7px] uppercase tracking-[0.25em] text-[#8D6E63] font-bold font-sans">
-                    Interiors & Architecture
-                  </span>
-                </div>
-              </button>
-            </div>
-
-          </div>
-        </motion.header>
-      )}
-
-      {/* MOBILE POPUP MENU MODAL */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[10000] bg-black/75 backdrop-blur-md md:hidden flex flex-col justify-end p-3 sm:p-5"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <motion.div
-              initial={{ y: '100%', opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: '100%', opacity: 0 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="bg-[#FAF6F0] rounded-[28px] border border-[#EBE3DB] shadow-2xl p-5 w-full space-y-4 max-h-[90vh] overflow-y-auto text-[#2B1A14]"
-              onClick={(e) => e.stopPropagation()}
+      <motion.header 
+        variants={{
+          visible: { y: 0 },
+          hidden: { y: "-100%" },
+        }}
+        initial="visible"
+        animate={showHeader ? "visible" : "hidden"}
+        transition={{ duration: 0.35, ease: "easeInOut" }}
+        className="sticky top-0 z-50 bg-[#FAF6F0]/95 backdrop-blur-md border-b border-[#EBE3DB] shadow-sm w-full"
+      >
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-2.5 md:py-3 space-y-2">
+          
+          {/* Header Row: Logo & Quick CTAs */}
+          <div className="flex flex-row justify-between items-center gap-4">
+            {/* Brand Logo Info */}
+            <button 
+              onClick={() => setActiveTab('home')}
+              className="flex items-center gap-2.5 sm:gap-3 text-left focus:outline-none group shrink-0"
             >
-              {/* Popup Header */}
-              <div className="flex items-center justify-between pb-3 border-b border-[#EBE3DB]">
-                <div className="flex items-center gap-2.5">
-                  <img 
-                    src="https://i.postimg.cc/qqxT1nHB/logo.webp" 
-                    alt="Al-Hammad Interiors Logo" 
-                    className="h-10 w-auto object-contain"
-                  />
-                  <div className="flex flex-col">
-                    <span className="font-hand text-lg font-bold text-[#2B1A14]">Al-Hammad</span>
-                    <span className="text-[8px] uppercase tracking-[0.2em] text-[#8D6E63] font-bold">Navigation Menu</span>
-                  </div>
-                </div>
+              <img 
+                src="https://i.postimg.cc/qqxT1nHB/logo.webp" 
+                alt="Al-Hammad Interiors Logo" 
+                className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-sm"
+              />
+              <div className="flex flex-col">
+                <span className="font-hand text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-[#2B1A14] transition-colors group-hover:text-[#8D6E63]">
+                  Al-Hammad
+                </span>
+                <span className="text-[7px] sm:text-[8px] uppercase tracking-[0.3em] text-[#8D6E63] block font-bold font-sans">
+                  Interiors & Architecture
+                </span>
+              </div>
+            </button>
 
+            {/* Desktop Navigation Links */}
+            <nav className="hidden md:flex items-center gap-2">
+              {[
+                { id: 'home', label: 'Explore' },
+                { id: 'portfolio', label: 'Portfolio' },
+                { id: 'testimonials', label: 'Testimonials' },
+                { id: 'faqs', label: 'FAQs' },
+                { id: 'about', label: 'About' }
+              ].map((tab) => {
+                const isActive = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id as TabType)}
+                    className={`relative py-2 px-4 rounded-full text-xs font-bold uppercase tracking-[0.15em] transition-all duration-300 cursor-pointer ${
+                      isActive 
+                        ? 'bg-[#24140E] text-[#FAF6F0] border border-[#3D2318]/50 shadow-[0_10px_20px_-4px_rgba(24,12,6,0.45),_inset_0_2.5px_4px_rgba(255,255,255,0.32),_inset_0_-4.5px_9px_rgba(0,0,0,0.75)]' 
+                        : 'text-[#8D6E63] hover:text-[#2B1A14] hover:bg-[#FAF6F0] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.6),_inset_0_-2px_4px_rgba(180,150,130,0.15)]'
+                    }`}
+                  >
+                    <span>{tab.label}</span>
+                  </button>
+                );
+              })}
+            </nav>
+
+            {/* Action Button */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              <a
+                href={`https://wa.me/${STUDIO_INFO.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent("Hello Al-Hammad Interiors! I would like to request a consultation for my space.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#24140E] hover:bg-[#341e14] text-[#FAF6F0] px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-[0.12em] transition-all duration-300 border border-[#3D2318]/50 shadow-md flex items-center gap-1.5 cursor-pointer shrink-0"
+              >
+                <Phone className="w-3.5 h-3.5 text-[#C5A880]" />
+                <span className="hidden sm:inline">Consultation</span>
+                <span className="sm:hidden">Consult</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Mobile Navigation Tabs Bar (Visible on mobile/tablet) */}
+          <div className="flex md:hidden overflow-x-auto no-scrollbar pt-1 pb-1 -mx-2 px-2 items-center gap-1.5 border-t border-[#EBE3DB]/60">
+            {[
+              { id: 'home', label: 'Explore' },
+              { id: 'portfolio', label: 'Portfolio' },
+              { id: 'testimonials', label: 'Testimonials' },
+              { id: 'faqs', label: 'FAQs' },
+              { id: 'about', label: 'About' }
+            ].map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
                 <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-full bg-[#EBE3DB]/60 text-[#2B1A14] hover:bg-[#EBE3DB] transition-all cursor-pointer"
-                  aria-label="Close menu"
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as TabType)}
+                  className={`py-1.5 px-3 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+                    isActive 
+                      ? 'bg-[#24140E] text-[#FAF6F0] border border-[#3D2318]/50 shadow-sm' 
+                      : 'bg-white text-[#8D6E63] border border-[#EBE3DB]'
+                  }`}
                 >
-                  <X className="w-5 h-5" />
+                  {tab.label}
                 </button>
-              </div>
+              );
+            })}
+          </div>
 
-              {/* Navigation Links */}
-              <nav className="flex flex-col gap-2.5">
-                {[
-                  { id: 'home', label: 'Explore Showcase' },
-                  { id: 'portfolio', label: 'Portfolio Gallery' },
-                  { id: 'about', label: 'About Studio' }
-                ].map((tab) => {
-                  const isActive = activeTab === tab.id;
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => {
-                        setActiveTab(tab.id as TabType);
-                        setMobileMenuOpen(false);
-                      }}
-                      className={`w-full min-h-[50px] px-5 rounded-2xl text-xs font-bold uppercase tracking-[0.15em] text-left flex items-center justify-between transition-all cursor-pointer ${
-                        isActive 
-                          ? 'bg-[#24140E] text-[#FAF6F0] shadow-md border border-[#3D2318]/50' 
-                          : 'bg-white text-[#2B1A14] border border-[#EBE3DB] hover:bg-[#F3EBE3]'
-                      }`}
-                    >
-                      <span>{tab.label}</span>
-                      <ChevronRight className={`w-4 h-4 ${isActive ? 'text-[#C5A880]' : 'text-[#8D6E63]'}`} />
-                    </button>
-                  );
-                })}
-              </nav>
-
-              {/* Action Buttons */}
-              <div className="pt-2 flex flex-col gap-2.5">
-                <a
-                  href={`https://wa.me/${STUDIO_INFO.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent("Hello Al-Hammad Interiors! I would like to request a consultation for my space.")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full min-h-[50px] bg-[#24140E] text-[#FAF6F0] px-5 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-[0.15em] flex items-center justify-center gap-2 border border-[#3D2318]/50 shadow-lg cursor-pointer"
-                >
-                  <Phone className="w-4 h-4 text-[#C5A880]" />
-                  <span>Book Consultation on WhatsApp</span>
-                </a>
-
-                <button 
-                  onClick={() => {
-                    setActiveTab('about');
-                    setMobileMenuOpen(false);
-                  }}
-                  className="w-full min-h-[46px] bg-white border border-[#EBE3DB] px-4 py-3 rounded-2xl flex items-center justify-between text-[#2B1A14] cursor-pointer"
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="flex text-[#C5A880]">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-current" />
-                      ))}
-                    </div>
-                    <span className="text-xs font-bold">{STUDIO_INFO.rating}/5 Rating</span>
-                  </div>
-                  <span className="text-[10px] text-[#8D6E63] font-semibold">{STUDIO_INFO.reviewCount} Verified Reviews</span>
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      </motion.header>
 
       {/* MASTER CONTENT AREA WITH SMOOTH COMPONENT TRANSITIONS */}
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-16 z-10 relative">
@@ -720,7 +612,33 @@ export default function App() {
             </motion.div>
           )}
 
-          {/* TAB 3: ABOUT, SHOWROOM DETAILS AND REVIEWS */}
+          {/* TAB 3: DEDICATED TESTIMONIALS PAGE */}
+          {activeTab === 'testimonials' && (
+            <motion.div
+              key="testimonials-tab"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.5 }}
+            >
+              <TestimonialsSection />
+            </motion.div>
+          )}
+
+          {/* TAB 4: DEDICATED FAQS PAGE */}
+          {activeTab === 'faqs' && (
+            <motion.div
+              key="faqs-tab"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.5 }}
+            >
+              <FaqSection />
+            </motion.div>
+          )}
+
+          {/* TAB 5: ABOUT, SHOWROOM DETAILS AND REVIEWS */}
           {activeTab === 'about' && (
             <motion.div
               key="about-tab"
@@ -745,7 +663,7 @@ export default function App() {
                   </div>
 
                   <p className="text-xs text-[#8D6E63] leading-relaxed font-light">
-                    Under the creative leadership of Hammad Malik, Al-Hammad Interiors has grown from a specialized wood polishing workshop into one of Gulshan-e-Iqbal's premier full-service turnkey design studios. We combine raw spatial mathematics with exquisite modern finishes to engineer homes that tell personal stories.
+                    Under the creative leadership of Hammad Malik, Al-Hammad Interiors has grown from a specialized wood polishing workshop into one of Gulshan-e-Iqbal's premier full-service turnkey interior and architecture firms. We combine raw spatial mathematics with exquisite modern finishes to engineer homes that tell personal stories.
                   </p>
 
                   {/* Complete Contacts List */}
@@ -859,89 +777,6 @@ export default function App() {
                       </div>
                     </div>
                   </div>
-                </div>
-
-              </div>
-
-              {/* Large styled contact / virtual design booking form */}
-              <div id="contact-booking-form" className="bg-white border border-[#EBE3DB] rounded-[32px] p-6 md:p-12 relative overflow-hidden">
-                <div className="absolute right-[-40px] top-[-40px] opacity-[0.02]">
-                  <Grid className="w-80 h-80 text-[#2B1A14]" />
-                </div>
-
-                <div className="max-w-3xl mx-auto space-y-8 relative z-10">
-                  <div className="text-center space-y-3">
-                    <span className="text-xs font-bold text-[#8D6E63] uppercase tracking-[0.25em] block">Initiate Your Project</span>
-                    <h3 className="text-4xl md:text-6xl font-hand text-[#2B1A14]">Schedule Consultation</h3>
-                    <p className="text-xs md:text-sm text-[#8D6E63] max-w-md mx-auto leading-relaxed font-light font-sans">
-                      Reserve your space design session. Meet senior design engineers at our Gulshan showroom or book a survey site visit.
-                    </p>
-                  </div>
-
-                  {!contactFormSubmitted ? (
-                    <form onSubmit={handleContactSubmit} className="space-y-5 font-sans">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8D6E63]">Full Name</label>
-                          <input 
-                            type="text" 
-                            required
-                            placeholder="e.g., Zainab Siddiqui"
-                            value={contactName}
-                            onChange={(e) => setContactName(e.target.value)}
-                            className="w-full min-h-[48px] bg-[#FAF6F0] border border-[#EBE3DB] focus:border-[#2B1A14] focus:ring-0 rounded-full p-3.5 px-6 text-xs outline-none text-[#2B1A14] font-semibold transition-colors"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8D6E63]">WhatsApp / Phone Number</label>
-                          <input 
-                            type="tel" 
-                            required
-                            placeholder="e.g., 0302 8212429"
-                            value={contactPhone}
-                            onChange={(e) => setContactPhone(e.target.value)}
-                            className="w-full min-h-[48px] bg-[#FAF6F0] border border-[#EBE3DB] focus:border-[#2B1A14] focus:ring-0 rounded-full p-3.5 px-6 text-xs outline-none text-[#2B1A14] font-semibold transition-colors"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8D6E63]">Project Scope & Details</label>
-                        <textarea 
-                          rows={4}
-                          placeholder="Please specify room types (e.g., Bedroom, Living room, Kitchen) and location (e.g., DHA, Clifton, Gulshan-e-Iqbal)..."
-                          value={contactMsg}
-                          onChange={(e) => setContactMsg(e.target.value)}
-                          className="w-full bg-[#FAF6F0] border border-[#EBE3DB] focus:border-[#2B1A14] focus:ring-0 rounded-[20px] p-4 px-6 text-xs outline-none text-[#2B1A14] font-semibold transition-colors"
-                        />
-                      </div>
-
-                      <div className="pt-3">
-                        <button
-                          type="submit"
-                          className="w-full min-h-[48px] bg-[#2B1A14] hover:bg-[#422A1E] text-[#FAF6F0] py-4 px-6 rounded-full font-bold uppercase tracking-[0.2em] text-xs transition-all shadow-lg flex items-center justify-center cursor-pointer"
-                        >
-                          Book Onsite Inspection
-                        </button>
-                      </div>
-                    </form>
-                  ) : (
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="bg-white border border-emerald-200 text-center rounded-[24px] p-8 space-y-4 max-w-md mx-auto shadow-md"
-                    >
-                      <div className="w-12 h-12 bg-emerald-50 text-emerald-700 rounded-full flex items-center justify-center mx-auto border border-emerald-100">
-                        <Check className="w-5 h-5 stroke-[3]" />
-                      </div>
-                      <div className="space-y-2">
-                        <h4 className="font-serif text-[#2B1A14] font-semibold text-lg">Thank You, {contactName}!</h4>
-                        <p className="text-xs text-[#8D6E63] leading-relaxed font-light">
-                          Your onsite inspection query has been logged! A senior design coordinator will reach you on <strong>{contactPhone}</strong> within 12 hours to lock in a site visit slot.
-                        </p>
-                      </div>
-                    </motion.div>
-                  )}
                 </div>
               </div>
 

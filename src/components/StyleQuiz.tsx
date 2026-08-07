@@ -220,7 +220,7 @@ export default function StyleQuiz() {
               {/* Right Column: Recommended Portfolios & Quick Consultation Booking */}
               <div className="space-y-6 bg-white border border-[#EAE3DB] p-6 rounded-xl shadow-md">
                 <div>
-                  <h4 className="font-serif font-semibold text-base text-[#241815] mb-3">Matching Studio Project</h4>
+                  <h4 className="font-serif font-semibold text-base text-[#241815] mb-3">Matching Portfolio Project</h4>
                   <div className="space-y-3">
                     {PROJECTS.filter(p => result.recommendedProjectIds.includes(p.id)).map((proj) => (
                       <div key={proj.id} className="flex gap-4 bg-[#FAF8F6] p-2.5 rounded-lg border border-[#EAE3DB] items-center">
@@ -240,58 +240,26 @@ export default function StyleQuiz() {
                   </div>
                 </div>
 
-                {/* Micro Consultation Form */}
-                <div className="border-t border-[#EAE3DB] pt-5 space-y-4">
+                {/* Direct WhatsApp Action Link */}
+                <div className="border-t border-[#EAE3DB] pt-5 space-y-3">
                   <div className="flex items-start gap-3">
                     <Calendar className="w-5 h-5 text-[#C5A880] shrink-0 mt-0.5" />
                     <div>
-                      <h5 className="font-serif text-sm font-semibold text-[#241815]">Book Style Consultation</h5>
+                      <h5 className="font-serif text-sm font-semibold text-[#241815]">Discuss Your Results</h5>
                       <p className="text-[10px] text-[#8C7A6B] mt-1 leading-relaxed">
-                        Reserve a 30-minute workspace design preview in Karachi based on your <strong>{result.title}</strong> results.
+                        Connect with our senior interior architects on WhatsApp to review your <strong>{result.title}</strong> preference.
                       </p>
                     </div>
                   </div>
 
-                  {!isBooked ? (
-                    <form onSubmit={handleBookingSubmit} className="space-y-3">
-                      <div className="grid grid-cols-2 gap-3">
-                        <input 
-                          type="text" 
-                          required
-                          placeholder="Your Name"
-                          value={bookingName}
-                          onChange={(e) => setBookingName(e.target.value)}
-                          className="bg-[#FAF8F6] border border-[#EAE3DB] focus:border-[#C5A880] rounded-lg p-3 text-xs text-[#241815] font-semibold outline-none transition-colors"
-                        />
-                        <input 
-                          type="tel" 
-                          required
-                          placeholder="WhatsApp / Phone"
-                          value={bookingPhone}
-                          onChange={(e) => setBookingPhone(e.target.value)}
-                          className="bg-[#FAF8F6] border border-[#EAE3DB] focus:border-[#C5A880] rounded-lg p-3 text-xs text-[#241815] font-semibold outline-none transition-colors"
-                        />
-                      </div>
-                      <button
-                        type="submit"
-                        className="w-full bg-[#241815] hover:bg-[#1C1311] text-[#FAF8F5] text-[10px] font-bold py-3 px-4 rounded-lg uppercase tracking-[0.15em] transition-all"
-                      >
-                        Secure Priority Call
-                      </button>
-                    </form>
-                  ) : (
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="bg-emerald-50 text-emerald-800 border border-emerald-100 rounded-lg p-4 text-center space-y-2 shadow-sm"
-                    >
-                      <CheckCircle className="w-5 h-5 text-emerald-600 mx-auto" />
-                      <h5 className="font-serif text-xs font-semibold text-emerald-950">Inquiry Logged Successfully!</h5>
-                      <p className="text-[10px] text-emerald-800 leading-relaxed">
-                        We have logged your preference for <strong>{result.title}</strong>. Our senior consultant will call <strong>{bookingPhone}</strong> within 24 hours.
-                      </p>
-                    </motion.div>
-                  )}
+                  <a
+                    href={`https://wa.me/923028212429?text=${encodeURIComponent(`Hello Al-Hammad Interiors! I completed the Style Quiz and matched with: ${result.title}. I would like to discuss my project.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-[#241815] hover:bg-[#1C1311] text-[#FAF8F5] text-[10px] font-bold py-3.5 px-4 rounded-xl uppercase tracking-[0.15em] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                  >
+                    <span>Discuss Results on WhatsApp</span>
+                  </a>
                 </div>
               </div>
             </div>

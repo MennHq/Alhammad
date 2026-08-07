@@ -186,7 +186,7 @@ export default function InteractivePalette({ onBack }: { onBack: () => void }) {
           onClick={onBack}
           className="bg-[#1C1311]/95 text-[#FAF8F5] border border-white/10 hover:border-white/20 hover:bg-[#2A1D1A] px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-2xl flex items-center gap-2"
         >
-          ← Exit Studio
+          ← Exit Canvas
         </button>
       </div>
 

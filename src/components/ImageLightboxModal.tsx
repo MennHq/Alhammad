@@ -126,7 +126,7 @@ export default function ImageLightboxModal({
 
   const handleWhatsAppInquiry = () => {
     const text = encodeURIComponent(
-      `Hello Al-Hammad Interiors! I am interested in inquiring about "${currentItem.title}" (${currentItem.category || 'Interior Design'}). Please contact me back with project details.`
+      `Hello Al-Hammad Interiors! I am interested in inquiring about "${currentItem.title}" (${currentItem.image}). Category: ${currentItem.category || 'Interior Design'}. Please contact me back with project details.`
     );
     const whatsappUrl = `https://wa.me/${STUDIO_INFO.whatsapp.replace(/[^0-9]/g, '')}?text=${text}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');

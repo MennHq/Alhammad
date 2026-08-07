@@ -42,7 +42,7 @@ export default function PortfolioSlider({ projects, onOpenLightbox }: PortfolioS
       <div className="lg:col-span-4 space-y-4">
         <div className="px-3 py-1.5 bg-[#FAF8F6] rounded-md border border-[#EAE3DB] inline-flex items-center gap-2 mb-1">
           <Sliders className="w-3.5 h-3.5 text-[#C5A880]" />
-          <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8C7A6B]">Interactive Studio</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8C7A6B]">Interactive Showcase</span>
         </div>
         <h3 className="text-2xl font-serif text-[#241815] font-light">Curated <span className="italic">Projects</span></h3>
         
